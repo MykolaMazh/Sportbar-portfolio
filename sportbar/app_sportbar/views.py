@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
+from .models import Category
+
 
 def index(request):
-    return render(request, "app_sportbar/index.html")
+    print(Category.objects.all())
+    return render(request, "app_sportbar/index.html", {"categories": Category.objects.all()})
