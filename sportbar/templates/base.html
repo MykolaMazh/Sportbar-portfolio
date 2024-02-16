@@ -42,11 +42,8 @@
                 <div class="nav-collapse collapse pull-right">
                     <ul class="nav" id="top-navigation">
                         <li class="active"><a href="#home">Home</a></li>
-                        <li><a href="#service">Services</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#matches">Matches</a></li>
                         <li><a href="#categories">Delivery</a></li>
-                        <li><a href="#clients">Clients</a></li>
-                        <li><a href="#price">Price</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -115,7 +112,7 @@
 
 
     <!-- Matches section start -->
-    <div class="section secondary-section " id="portfolio">
+    <div class="section secondary-section " id="matches">
         <div class="triangle"></div>
         <div class="container">
             <div class=" title">
@@ -136,9 +133,9 @@
                     <a href="#noAction">Identity</a>
                 </li>
             </ul>
-            <!-- Start details for portfolio project 1 -->
+            <!-- Start details for matches project 1 -->
             <div id="single-project">
-                <!-- Start details for portfolio project 2 -->
+                <!-- Start details for matches project 2 -->
                 {% for category in categories %}
                 <div id="slidingDiv{{category.id}}" class="toggleDiv row-fluid single-project">
                     <div class="span6">
@@ -171,9 +168,9 @@
                     </div>
                 </div>
                 {% endfor %}
-                <!-- End details for portfolio project 2 -->
+                <!-- End details for matches project 2 -->
 
-                <ul id="portfolio-grid" class="thumbnails row">
+                <ul id="matches-grid" class="thumbnails row">
                     {% for category in categories %}
                     <li class="span4 mix web">
                         <div class="thumbnail">
