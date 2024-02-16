@@ -211,7 +211,9 @@
                         <h3>{{category.title}}</h3>
                         <div class="mask">
                             <h2>{{category.description}}</h2>
-                            <button type="button" class="btn btn-success">Choose and order {{category.title}}</button>
+                            <a href="{% url 'app_sportbar:category_detail' category.slug %}">
+                                <button type="button" class="btn btn-success">Choose and order {{category.title}}</button>
+                            </a>
                         </div>
                     </div>
                 </div>
