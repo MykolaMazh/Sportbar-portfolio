@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+     <div class="section primary-section" id="categories">
+        <div class="triangle"></div>
+        <div class="container">
+            <div class="title">
+                <h1>Categories</h1>
+                <p>Order food to your home</p>
+            </div>
+
+            <div class="row-fluid team">
+                {% for position in object.menu_positions.all %}
+                <div class="span4 mg-left0" id="category{{category.id}}">
+                    <div class="thumbnail">
+                        <img src="{{position.image.url}}" alt="team 1">
+                        <h3>{{position.title}}</h3>
+                        <div class="mask">
+                            <h2>{{position.description}}</h2>
+                            <h2>{{position.price}}$</h2>
+                            <button type="button" class="btn btn-success">Choose and order {{category.title}}</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
