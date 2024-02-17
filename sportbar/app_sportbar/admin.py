@@ -7,5 +7,10 @@ class CategoryAdmin(admin.ModelAdmin):
 class MenuPositionAdmin(admin.ModelAdmin):
     save_as = True
 
+
+class MatchAdmin(admin.ModelAdmin):
+    save_as = True
+
 admin.site.register(MenuPosition, MenuPositionAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Match, MatchAdmin)

@@ -25,3 +25,16 @@ class MenuPosition(models.Model):
 
     def __str__(self):
         return self.title
+
+class Match(models.Model):
+    title = models.CharField(max_length=250)
+    championship = models.CharField(max_length=65)
+    event_date = models.DateTimeField()
+    preview = models.TextField()
+    poster = models.ImageField(upload_to='images/match_poster/%Y/%m/%d', max_length=100,
+                              blank=True)
+
+    def __str__(self):
+
+        return f"{self.title} - {self.event_date.strftime('%M/%d %H:%M')}"
+

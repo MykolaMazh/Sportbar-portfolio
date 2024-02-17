@@ -31,7 +31,7 @@
         <div class="navbar-inner">
             <div class="container">
                 <a href="#" class="brand">
-                    <img src="images/logo.png" width="120" height="40" alt="Logo" />
+                    <img src="{% static 'app_sportbar/images/logo.png' %}"  alt="Logo" />
                     <!-- This is website logo -->
                 </a>
                 <!-- Navigation button, visible on small resolution -->
@@ -112,12 +112,12 @@
 
 
     <!-- Matches section start -->
-    <div class="section secondary-section " id="matches">
+<div class="section secondary-section " id="matches">
         <div class="triangle"></div>
         <div class="container">
             <div class=" title">
-                <h1>Have You Seen our Works?</h1>
-                <p>Duis mollis placerat quam, eget laoreet tellus tempor eu. Quisque dapibus in purus in dignissim.</p>
+                <h1>UPCOMING EVENTS</h1>
+                <p>You're always welcome to watch the most exciting matches</p>
             </div>
             <ul class="nav nav-pills">
                 <li class="filter" data-filter="all">
@@ -133,13 +133,12 @@
                     <a href="#noAction">Identity</a>
                 </li>
             </ul>
-            <!-- Start details for matches project 1 -->
+            <!-- Start details for portfolio project 1 -->
             <div id="single-project">
-                <!-- Start details for matches project 2 -->
-                {% for category in categories %}
-                <div id="slidingDiv{{category.id}}" class="toggleDiv row-fluid single-project">
+                {% for match in matches %}
+                <div id="slidingDiv{{match.id}}" class="toggleDiv row-fluid single-project">
                     <div class="span6">
-                        <img src="{{category.image.url}}" alt="project 2222">
+                        <img src="{{match.poster.url}}" alt="project 2222">
                     </div>
                     <div class="span6">
                         <div class="project-description">
@@ -168,18 +167,17 @@
                     </div>
                 </div>
                 {% endfor %}
-                <!-- End details for matches project 2 -->
-
-                <ul id="matches-grid" class="thumbnails row">
-                    {% for category in categories %}
+                <!-- End details for portfolio project 9 -->
+                <ul id="portfolio-grid" class="thumbnails row">
+                    {% for match in matches %}
                     <li class="span4 mix web">
                         <div class="thumbnail">
-                            <img src="{{category.image.url}}" alt="project 1">
-                            <a href="#single-project" class="more show_hide" rel="#slidingDiv{{category.pk}}">
+                            <img src="{{match.poster.url}}" alt="match {{match.pk}}">
+                            <a href="#single-project" class="more show_hide" rel="#slidingDiv{{match.pk}}">
                                 <i class="icon-plus"></i>
                             </a>
-                            <h3>Thumbnail label</h3>
-                            <p>{{category.title}}</p>
+                            <h3>{{match.title}}</h3>
+                            <p>{{match.preview}}</p>
                             <div class="mask"></div>
                         </div>
                     </li>

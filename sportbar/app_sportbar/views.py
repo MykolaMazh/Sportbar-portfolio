@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 
-from .models import Category
+from .models import Category, Match
 
 
 def index(request):
@@ -9,7 +9,8 @@ def index(request):
         request,
         "base.html",
         {
-            "categories": Category.objects.all()
+            "categories": Category.objects.all(),
+            "matches": Match.objects.all()
         }
     )
 
