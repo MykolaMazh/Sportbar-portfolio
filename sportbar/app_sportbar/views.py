@@ -1,7 +1,10 @@
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 
-from .models import Category, Match, Championship
+from .forms import ClientCreationForm
+from .models import Category, Match, Championship, Client
 
 
 def index(request):
@@ -17,3 +20,7 @@ def index(request):
 
 class CategoryDetailView(DetailView):
     model = Category
+
+class ClientCreateView(CreateView):
+    model = get_user_model()
+    form_class = ClientCreationForm

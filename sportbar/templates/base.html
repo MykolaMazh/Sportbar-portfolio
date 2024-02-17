@@ -41,10 +41,14 @@
                 <!-- Main navigation -->
                 <div class="nav-collapse collapse pull-right">
                     <ul class="nav" id="top-navigation">
-                        <li class="active"><a href="{% url 'app_sportbar:home' %}#home">Home</a></li>
-                        <li><a href="{% url 'app_sportbar:home' %}#matches">Matches</a></li>
-                        <li><a href="{% url 'app_sportbar:home' %}#categories">Delivery</a></li>
-                        <li><a href="{% url 'app_sportbar:home' %}#contact">Contact</a></li>
+                        <li class="active"><a href="{% url 'sportbar:home' %}#home">Home</a></li>
+                        <li><a href="{% url 'sportbar:home' %}#matches">Matches</a></li>
+                        <li><a href="{% url 'sportbar:home' %}#categories">Delivery</a></li>
+                        <li><a href="{% url 'sportbar:home' %}#contact">Contact</a></li>
+                        <li>
+                            <a href="{% url 'sportbar:register' %}">
+                                <button type="button" class="btn btn-success">Register</button></li>
+                            </a>
                     </ul>
                 </div>
                 <!-- End main navigation -->
@@ -200,7 +204,7 @@
                         <h3>{{category.title}}</h3>
                         <div class="mask">
                             <h2>{{category.description}}</h2>
-                            <a href="{% url 'app_sportbar:category_detail' category.slug %}">
+                            <a href="{% url 'sportbar:category_detail' category.slug %}">
                                 <button type="button" class="btn btn-success">Choose and order {{category.title}}</button>
                             </a>
                         </div>
