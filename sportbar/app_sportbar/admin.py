@@ -14,3 +14,4 @@ class MatchAdmin(admin.ModelAdmin):
 admin.site.register(MenuPosition, MenuPositionAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Match, MatchAdmin)
+admin.site.register(Championship)

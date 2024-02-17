@@ -28,7 +28,10 @@ class MenuPosition(models.Model):
 
 class Match(models.Model):
     title = models.CharField(max_length=250)
-    championship = models.CharField(max_length=65)
+    championship = models.ForeignKey(
+        "Championship",
+        on_delete=models.CASCADE
+    )
     event_date = models.DateTimeField()
     preview = models.TextField()
     poster = models.ImageField(upload_to='images/match_poster/%Y/%m/%d', max_length=100,
@@ -38,3 +41,9 @@ class Match(models.Model):
 
         return f"{self.title} - {self.event_date.strftime('%M/%d %H:%M')}"
 
+
+class Championship(models.Model):
+    title = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.title
