@@ -123,15 +123,11 @@
                 <li class="filter" data-filter="all">
                     <a href="#noAction">All</a>
                 </li>
-                <li class="filter" data-filter="web">
-                    <a href="#noAction">Web</a>
+                {% for championship in championships %}
+                <li class="filter" data-filter="{{championship.title}}">
+                    <a href="#noAction">{{championship.title}}</a>
                 </li>
-                <li class="filter" data-filter="photo">
-                    <a href="#noAction">Photo</a>
-                </li>
-                <li class="filter" data-filter="identity">
-                    <a href="#noAction">Identity</a>
-                </li>
+                {% endfor %}
             </ul>
             <!-- Start details for portfolio project 1 -->
             <div id="single-project">
@@ -170,7 +166,7 @@
                 <!-- End details for portfolio project 9 -->
                 <ul id="portfolio-grid" class="thumbnails row">
                     {% for match in matches %}
-                    <li class="span4 mix web">
+                    <li class="span4 mix {{match.championship}}">
                         <div class="thumbnail">
                             <img src="{{match.poster.url}}" alt="match {{match.pk}}">
                             <a href="#single-project" class="more show_hide" rel="#slidingDiv{{match.pk}}">
