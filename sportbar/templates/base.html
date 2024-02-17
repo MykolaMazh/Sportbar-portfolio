@@ -139,24 +139,24 @@
                     <div class="span6">
                         <div class="project-description">
                             <div class="project-title clearfix">
-                                <h3>Webste for Some Client</h3>
+                                <h3>{{match.title}}</h3>
                                 <span class="show_hide close">
                                     <i class="icon-cancel"></i>
                                 </span>
                             </div>
                             <div class="project-info">
                                 <div>
-                                    <span>Client</span>Some Client Name
+                                    <span>Competition</span>{{match.championship}}
                                 </div>
                                 <div>
-                                    <span>Date</span>July 2013
+                                    <span>Date</span>{{match.event_date}}
                                 </div>
                                 <div>
-                                    <span>Skills</span>HTML5, CSS3, JavaScript
+                                    <span>Preview</span>{{match.preview}}
                                 </div>
-                                <div>
-                                    <span>Link</span>http://examplecomp.com
-                                </div>
+                                <a href="">
+                                <button type="button" class="btn btn-success">Book a table</button>
+                            </a>
                             </div>
                             <p>{{category.description}}</p>
                         </div>
@@ -173,7 +173,7 @@
                                 <i class="icon-plus"></i>
                             </a>
                             <h3>{{match.title}}</h3>
-                            <p>{{match.preview}}</p>
+                            <p>{{match.event_date}}</p>
                             <div class="mask"></div>
                         </div>
                     </li>
