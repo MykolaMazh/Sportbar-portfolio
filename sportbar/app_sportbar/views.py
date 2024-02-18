@@ -25,4 +25,4 @@ class CategoryDetailView(DetailView):
 class ClientCreateView(CreateView):
     model = get_user_model()
     form_class = ClientCreationForm
-    success_url = reverse_lazy("sportbar:index")
+    success_url = reverse_lazy("login")

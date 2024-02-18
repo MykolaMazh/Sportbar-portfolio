@@ -903,6 +903,34 @@ p {
     }
 }
 
+
+
+
+/*-----------------------added----------------------*/
 .span4.mg-left0{
     margin-left: 0;
+}
+
+.form-added{
+        background-color: #371219;
+    width: 50%;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10px;
+}
+
+h1.form-added{
+    color: #1b1b1b;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+.centered-div{
+    text-align: center;
+    width: max-content;
+    margin: 2% auto;
+    background-color: #f7e402;
+    color: black;
+    padding: 1em;
+    border: 10px solid black;
 }
