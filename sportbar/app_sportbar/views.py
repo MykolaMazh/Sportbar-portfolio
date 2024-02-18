@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView
 
 from .forms import ClientCreationForm
@@ -24,3 +25,4 @@ class CategoryDetailView(DetailView):
 class ClientCreateView(CreateView):
     model = get_user_model()
     form_class = ClientCreationForm
+    success_url = reverse_lazy("sportbar:index")
