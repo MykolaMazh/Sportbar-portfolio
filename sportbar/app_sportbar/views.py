@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView
 
 from .forms import ClientCreationForm
-from .models import Category, Match, Championship, Client
+from .models import Category, Match, Championship
 
 
 def index(request):

@@ -1,0 +1,36 @@
+<!-- Main navigation -->
+<div class="nav-collapse collapse pull-right">
+  <ul class="nav" id="top-navigation">
+    <li class="active"><a href="{% url 'sportbar:home' %}#home">Home</a></li>
+    <li><a href="{% url 'sportbar:home' %}#matches">Matches</a></li>
+    <li><a href="{% url 'sportbar:home' %}#categories">Delivery</a></li>
+    <li><a href="{% url 'sportbar:home' %}#contact">Contact</a></li>
+    {% if request.user.is_authenticated %}
+    <li>
+      <a href="#home">
+        <button type="button" class="btn btn-success">{{request.user}}
+          <img src="{{request.user.avatar.url}}" width="30">
+        </button>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'logout' %}">
+        <button type="button" class="btn btn-success">Logout</button>
+      </a>
+    </li>
+    {% else %}
+    <li>
+      <a href="{% url 'sportbar:register' %}">
+        <button type="button" class="btn btn-success">Register</button>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'login' %}">
+        <button type="button" class="btn btn-success">Log in</button>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</div>
+<!-- End main navigation -->
+

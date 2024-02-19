@@ -6,5 +6,6 @@ app_name = "sportbar"
 urlpatterns = [
     path('', index, name="home"),
     path("category_detail/<str:slug>", CategoryDetailView.as_view(), name="category_detail"),
-    path("register/", ClientCreateView.as_view(), name="register")
+    path("register/", ClientCreateView.as_view(), name="register"),
+
 ]

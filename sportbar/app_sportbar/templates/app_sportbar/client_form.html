@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1 class="form-added">Registration page</h1>
-<form method="post" class="form-added">
+<form method="post" class="form-added" enctype="multipart/form-data">
     {% csrf_token %}
     {{form|crispy}}
     <button type="submit" class="btn btn-success"> Get registered</button>

@@ -1,0 +1,359 @@
+[
+
+  {
+    "model": "app_sportbar.category",
+    "pk": 1,
+    "fields": {
+      "title": "Beer",
+      "image": "images/2024/02/17/beer.jpg",
+      "description": "The Best  beer",
+      "slug": "beer"
+    }
+  },
+  {
+    "model": "app_sportbar.category",
+    "pk": 2,
+    "fields": {
+      "title": "Pizzas",
+      "image": "images/2024/02/17/pizza.jpg",
+      "description": "The Best pizzas",
+      "slug": "pizzas"
+    }
+  },
+  {
+    "model": "app_sportbar.category",
+    "pk": 3,
+    "fields": {
+      "title": "Burgers",
+      "image": "images/2024/02/17/burger.jpg",
+      "description": "The Best burgers",
+      "slug": "burgers"
+    }
+  },
+  {
+    "model": "app_sportbar.category",
+    "pk": 4,
+    "fields": {
+      "title": "Desserts",
+      "image": "images/2024/02/17/desserts.jpg",
+      "description": "The Best desserts",
+      "slug": "desserts"
+    }
+  },
+  {
+    "model": "app_sportbar.category",
+    "pk": 5,
+    "fields": {
+      "title": "Sandwiches",
+      "image": "images/2024/02/17/sandwich.jpg",
+      "description": "The Best sandwiches",
+      "slug": "sandwiches"
+    }
+  },
+  {
+    "model": "app_sportbar.category",
+    "pk": 6,
+    "fields": {
+      "title": "Salads",
+      "image": "images/2024/02/17/salad.jpg",
+      "description": "The Best salads",
+      "slug": "salads"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 1,
+    "fields": {
+      "title": "Beer1",
+      "description": "the first beer",
+      "price": "7.00",
+      "category": 1,
+      "image": "images/2024/02/17/beer1.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 2,
+    "fields": {
+      "title": "Beer2",
+      "description": "the second beer",
+      "price": "7.02",
+      "category": 1,
+      "image": "images/2024/02/17/beer2.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 3,
+    "fields": {
+      "title": "Beer3",
+      "description": "the third beer",
+      "price": "7.05",
+      "category": 1,
+      "image": "images/2024/02/17/beer3.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 4,
+    "fields": {
+      "title": "Beer4",
+      "description": "the fourth beer",
+      "price": "7.07",
+      "category": 1,
+      "image": "images/2024/02/17/beer4.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 5,
+    "fields": {
+      "title": "Beer5",
+      "description": "the fifth beer",
+      "price": "7.12",
+      "category": 1,
+      "image": "images/2024/02/17/beer5_dUULfIb.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 6,
+    "fields": {
+      "title": "Beer6",
+      "description": "the sixth beer",
+      "price": "7.15",
+      "category": 1,
+      "image": "images/2024/02/17/beer6.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 7,
+    "fields": {
+      "title": "Burger1",
+      "description": "the first burger",
+      "price": "6.95",
+      "category": 3,
+      "image": "images/2024/02/17/burger1.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 8,
+    "fields": {
+      "title": "Burger2",
+      "description": "the second burger",
+      "price": "6.90",
+      "category": 3,
+      "image": "images/2024/02/17/burger2.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 9,
+    "fields": {
+      "title": "Burger3",
+      "description": "the third burger",
+      "price": "6.85",
+      "category": 3,
+      "image": "images/2024/02/17/burger3.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 10,
+    "fields": {
+      "title": "Pizza1",
+      "description": "the first pizza",
+      "price": "6.82",
+      "category": 2,
+      "image": "images/2024/02/17/pizza1.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 11,
+    "fields": {
+      "title": "Pizza2",
+      "description": "the seecond pizza",
+      "price": "6.78",
+      "category": 2,
+      "image": "images/2024/02/17/pizza2.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 12,
+    "fields": {
+      "title": "Pizza3",
+      "description": "the third pizza",
+      "price": "6.80",
+      "category": 2,
+      "image": "images/2024/02/17/pizza3.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 13,
+    "fields": {
+      "title": "Sandwich1",
+      "description": "the first sandwich",
+      "price": "3.76",
+      "category": 5,
+      "image": "images/2024/02/17/sandwich1.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 14,
+    "fields": {
+      "title": "Sandwich2",
+      "description": "the second sandwich",
+      "price": "3.74",
+      "category": 5,
+      "image": "images/2024/02/17/sandwich2.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 15,
+    "fields": {
+      "title": "Sandwich3",
+      "description": "the third sandwich",
+      "price": "3.72",
+      "category": 5,
+      "image": "images/2024/02/17/sandwich3.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 16,
+    "fields": {
+      "title": "Salad1",
+      "description": "the first salad",
+      "price": "4.76",
+      "category": 6,
+      "image": "images/2024/02/17/salad1.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 17,
+    "fields": {
+      "title": "Salad2",
+      "description": "the second salad",
+      "price": "4.74",
+      "category": 6,
+      "image": "images/2024/02/17/salad2.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 18,
+    "fields": {
+      "title": "Salad3",
+      "description": "the thirdd salad",
+      "price": "4.72",
+      "category": 6,
+      "image": "images/2024/02/17/salad3.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 19,
+    "fields": {
+      "title": "Dessert1",
+      "description": "the first dessert",
+      "price": "8.76",
+      "category": 4,
+      "image": "images/2024/02/17/pexels-abhinav-goswami-291528.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 20,
+    "fields": {
+      "title": "Dessert2",
+      "description": "the second dessert",
+      "price": "8.74",
+      "category": 4,
+      "image": "images/2024/02/17/pexels-jhon-marquez-2373520.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 21,
+    "fields": {
+      "title": "Dessert3",
+      "description": "the third dessert",
+      "price": "8.72",
+      "category": 4,
+      "image": "images/2024/02/17/pexels-marta-dzedyshko-2067396.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.menuposition",
+    "pk": 22,
+    "fields": {
+      "title": "Dessert4",
+      "description": "the fourth dessert",
+      "price": "8.75",
+      "category": 4,
+      "image": "images/2024/02/17/pexels-suzy-hazelwood-1126359.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.match",
+    "pk": 1,
+    "fields": {
+      "title": "Man United - Liverpool",
+      "championship": 1,
+      "event_date": "2024-02-04T19:30:00Z",
+      "preview": "Exciting preview for Man United - Liverpool",
+      "poster": "images/match_poster/2024/02/17/MU-Liverpool.jpeg"
+    }
+  },
+  {
+    "model": "app_sportbar.match",
+    "pk": 3,
+    "fields": {
+      "title": "Inter - Milan",
+      "championship": 2,
+      "event_date": "2024-02-05T19:30:00Z",
+      "preview": "Exciting preview for Inter - Milan",
+      "poster": "images/match_poster/2024/02/17/im.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.match",
+    "pk": 4,
+    "fields": {
+      "title": "Real M - Barcelona",
+      "championship": 3,
+      "event_date": "2024-02-06T19:30:00Z",
+      "preview": "Exciting preview for Real M - Barcelona",
+      "poster": "images/match_poster/2024/02/17/rb.jpg"
+    }
+  },
+  {
+    "model": "app_sportbar.championship",
+    "pk": 1,
+    "fields": {
+      "title": "EPL"
+    }
+  },
+  {
+    "model": "app_sportbar.championship",
+    "pk": 2,
+    "fields": {
+      "title": "Serie A"
+    }
+  },
+  {
+    "model": "app_sportbar.championship",
+    "pk": 3,
+    "fields": {
+      "title": "LaLiga"
+    }
+  }
+]

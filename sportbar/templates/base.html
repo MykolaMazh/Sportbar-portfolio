@@ -29,7 +29,6 @@
   <link rel="apple-touch-icon-precomposed" href="{% static 'app_sportbar/images/ico/apple-touch-icon-57.png' %}">
   <link rel="shortcut icon" href="{% static 'app_sportbar/images/ico/favicon.ico' %}">
 </head>
-' %}"
 <body>
 <div class="navbar">
   <div class="navbar-inner">
@@ -43,35 +42,7 @@
         <i class="icon-menu"></i>
       </button>
       <!-- Main navigation -->
-      <div class="nav-collapse collapse pull-right">
-        <ul class="nav" id="top-navigation">
-          <li class="active"><a href="{% url 'sportbar:home' %}#home">Home</a></li>
-          <li><a href="{% url 'sportbar:home' %}#matches">Matches</a></li>
-          <li><a href="{% url 'sportbar:home' %}#categories">Delivery</a></li>
-          <li><a href="{% url 'sportbar:home' %}#contact">Contact</a></li>
-          {% if request.user.is_authenticated %}
-          <li><a><button class="btn-info">{{request.user}}</button></a></li>
-          <li><a>
-            <form method="post" action="{% url 'logout' %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-success">logout</button>
-            </form></a>
-          </li>
-
-          {% else %}
-          <li>
-            <a href="{% url 'sportbar:register' %}">
-              <button type="button" class="btn btn-success">Register</button>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'login' %}">
-              <button type="button" class="btn btn-success">Log in</button>
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
+      {% include "includes/navbar.html" %}
       <!-- End main navigation -->
     </div>
   </div>
