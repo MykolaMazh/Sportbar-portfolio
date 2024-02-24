@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     "app_sportbar.apps.AppSportbarConfig",
+    "app_cart.apps.AppCartConfig",
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,8 @@ LOGIN_REDIRECT_URL = "/"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+
+
+
+CART_SESSION_ID = 'cart'
