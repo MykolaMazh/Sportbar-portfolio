@@ -8,6 +8,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
     path('', include('app_sportbar.urls', namespace="app_sportbar")),
+    path('cart/', include('app_cart.urls', namespace="cart")),
     path("accounts/", include("django.contrib.auth.urls"))
 ]
 if settings.DEBUG:
