@@ -1,5 +1,10 @@
+from decimal import Decimal
+
 from django.conf import settings
 from django.db import models
+
+from app_sportbar.models import MenuPosition
+
 
 class Cart:
 
@@ -16,12 +21,12 @@ class Cart:
         self.cart = cart
 
     def add(self, product, quantity=1, update_quantity=False):
-        product_id = (product.id)
+        product_id = str(product.id)
 
         # freeze the current price
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0,
-                                     'price': (product.price)}
+                                     'price': str(product.price)}
 
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
@@ -29,3 +34,5 @@ class Cart:
             self.cart[product_id]['quantity'] += quantity
 
         self.session[settings.CART_SESSION_ID] = self.cart
+
+
