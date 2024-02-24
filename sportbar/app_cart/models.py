@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-class Cart():
+class Cart:
 
     def __init__(self, request):
         # current session

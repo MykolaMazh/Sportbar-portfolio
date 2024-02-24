@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView
 
+from app_cart.forms import CartAddProductForm
 from .forms import ClientCreationForm
 from .models import Category, Match, Championship
 
@@ -21,6 +22,11 @@ def index(request):
 
 class CategoryDetailView(DetailView):
     model = Category
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cart_add_form"] = CartAddProductForm()
+        return context
 
 class ClientCreateView(CreateView):
     model = get_user_model()

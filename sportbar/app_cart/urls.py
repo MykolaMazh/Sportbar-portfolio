@@ -6,6 +6,6 @@ from app_cart.views import cart_add
 app_name = 'cart'
 
 urlpatterns = [
-    path("", cart_add, name="cart"),
+    path("add/<str:slug>/", cart_add, name="add-to-cart"),
 
 ]
