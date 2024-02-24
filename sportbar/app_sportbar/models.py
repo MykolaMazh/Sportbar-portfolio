@@ -24,7 +24,7 @@ class MenuPosition(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="menu_positions")
     image = models.ImageField(upload_to='images/%Y/%m/%d', max_length=100,
                               blank=True)
-    slug = models.SlugField(max_length=50, unique=True, blank=True, null=True),
+    slug = models.SlugField(max_length=50, unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.title
