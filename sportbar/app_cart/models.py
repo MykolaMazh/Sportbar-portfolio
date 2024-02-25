@@ -33,7 +33,7 @@ class Cart:
         else:
             self.cart[product_id]['quantity'] += quantity
 
-        self.session[settings.CART_SESSION_ID] = self.cart
+        self.save()
 
 
     def __iter__(self):
@@ -52,3 +52,13 @@ class Cart:
     # the cart total cost
         return sum(Decimal(item['price']) * item['quantity'] for item in
                self.cart.values())
+
+    def save(self):
+        # update session. it's a dict now
+        self.session[settings.CART_SESSION_ID] = self.cart
+
+    def remove(self, product):
+        product_id = str(product.id)
+        if product_id in self.cart:
+            del self.cart[product_id]
+            self.save()

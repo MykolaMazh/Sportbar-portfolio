@@ -23,6 +23,12 @@ def cart_add(request, id):
             print(item)
         return redirect(request.META.get('HTTP_REFERER'))
 
+def cart_remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(MenuPosition, id=product_id)
+    cart.remove(product)
+    return redirect('cart:cart')
+
 
 
 
