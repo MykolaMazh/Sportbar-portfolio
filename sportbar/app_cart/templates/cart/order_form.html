@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% load crispy_forms_filters %}
+  {% load cart_custom_tags %}
+  {% cart_length as cart_length %}
+
+  {% if cart_length %}
+    <form class="form-added" method="post">
+      {% csrf_token %}
+      <h3>Add information to complete the order</h3>
+
+      {% if not request.user.is_authenticated %}
+        <div class="alert alert-danger" role="alert">
+          You cannot access your order history if you are not registered. <a href="{% url 'login' %}">Log in</a>/<a
+            href="{% url 'sportbar:register' %}">Sign up</a>
+        </div>
+      {% endif %}
+      {{ order_form|crispy }}
+      <button type="submit" class="btn btn-success">Complete the order</button>
+    </form>
+  {% else %}
+    <form class="form-added"">
+      <h1>We've received your order.</h1>
+      <a href=""><button type="button" class="btn btn-info">Go to your orders</button></a>
+    </form>
+  {% endif %}
+{% endblock %}

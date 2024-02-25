@@ -34,7 +34,7 @@
     </li>
     {% endif %}
     <li>
-      <a href="#home">
+      <a href="{% url 'cart:cart' %}">
         
         {% if cart_length %}
           {%  cart_length %}

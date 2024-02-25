@@ -11,4 +11,7 @@ class CartAddProductForm(forms.Form):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ('address', "phone")
+        fields = ("deliver_by",'address', "phone")
+        widgets = {
+            "deliver_by": forms.DateTimeInput(attrs={"type":"datetime-local"})
+        }

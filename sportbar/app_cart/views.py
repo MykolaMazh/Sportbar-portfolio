@@ -3,13 +3,19 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 
 from app_cart.forms import CartAddProductForm, OrderForm
-from app_cart.models import Cart
+from app_cart.models import Cart, OrderItem
 from app_sportbar.models import MenuPosition
 
 
 def cart(request):
     cart = Cart(request)
-    return render(request, "cart/cart.html", {"cart_instance":cart})
+    return render(
+        request,
+        "cart/cart.html",
+        {
+            "cart_instance":cart,
+        }
+    )
 
 
 def cart_add(request, id):
@@ -30,8 +36,8 @@ def cart_remove(request, product_id):
 
 class CreateOrder(View):
     def get(self, request):
-        orderForm = OrderForm()
-        return render(request, 'cart/order_form.html', {'order_form': orderForm})
+        order_form = OrderForm()
+        return render(request, 'cart/order_form.html', {'order_form': order_form})
 
     def post(self, request):
         order_form = OrderForm(request.POST)
@@ -50,6 +56,7 @@ class CreateOrder(View):
                                          price=item['price'],
                                          quantity=item['quantity'])
             cart_instance.clear()
+        return render(request, 'cart/order_form.html', {'order_form': order_form})
 
 
 
