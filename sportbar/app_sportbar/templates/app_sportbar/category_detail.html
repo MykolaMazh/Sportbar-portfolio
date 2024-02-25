@@ -19,7 +19,7 @@
               <div class="mask">
                 <h2>{{ position.description }}</h2>
                 <h2>{{ position.price }}$</h2>
-                <form action="{% url 'cart:add-to-cart' position.slug %}" method="post">
+                <form action="{% url 'cart:add-to-cart' position.pk %}" method="post">
                   {% csrf_token %}
                   {{ cart_add_form }}
                   <input type="submit" value="Add to cart" class="btn btn-primary">

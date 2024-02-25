@@ -1,3 +1,6 @@
+{% load static %}
+{% load cart_custom_tags %}
+{% cart_length as cart_length %}
 <!-- Main navigation -->
 <div class="nav-collapse collapse pull-right">
   <ul class="nav" id="top-navigation">
@@ -30,7 +33,22 @@
       </a>
     </li>
     {% endif %}
+    <li>
+      <a href="#home">
+        
+        {% if cart_length %}
+          {%  cart_length %}
+        	<img src="{% static 'app_cart/images/cart.png' %}" width="30">
+        {% else %}
+          <img src="{% static 'app_cart/images/empty_cart.png' %}" width="30">
+        {% endif %} 
+          
+        
+      </a>
+    </li>
   </ul>
+
 </div>
+
 <!-- End main navigation -->
 

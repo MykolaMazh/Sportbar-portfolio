@@ -18,9 +18,6 @@ def cart_add(request, id):
         cart.add(
             product=MenuPosition.objects.get(pk=id),
             **form.cleaned_data)
-        print(cart.cart)
-        for item in cart.cart.values():
-            print(item)
         return redirect(request.META.get('HTTP_REFERER'))
 
 def cart_remove(request, product_id):
