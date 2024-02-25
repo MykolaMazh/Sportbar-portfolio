@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.conf import settings
+from django.core.validators import RegexValidator
 from django.db import models
 
 from app_sportbar.models import MenuPosition
@@ -73,7 +74,11 @@ class Cart:
 
 class Order(models.Model):
     client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
-    phone = models.BigIntegerField()
+    phone = models.BigIntegerField(validators=[RegexValidator(
+        regex=r'^\d{7,10}$',
+        message="phone number shold consists of from 7 to 10 figures")
+    ]
+    )
     address = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     deliver_by = models.DateTimeField(null=True, blank=True)

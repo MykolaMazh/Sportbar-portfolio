@@ -4,9 +4,8 @@
 {% endblock %}
 {% block content %}
   {% load cart_custom_tags %}
-{% cart_length as cart_length %}
-  {% cart_length %} {{ cart_length }}
- {% if cart_length %}
+  {% cart_length as cart_length %}
+  {% if cart_length %}
 
     <h1>Your shopping cart</h1>
     <div class="table-responsive" style="background-color: #1b1b1b">
@@ -114,6 +113,10 @@
   {% else %}
     <div class="table-responsive" style="background-color: #1b1b1b"><h1>Your cart is empty</h1></div>
   {% endif %}
+
+  <a href="{% url 'cart:orders-list' %}">
+      <button type="button" class="btn btn-info">Go to your orders</button>
+    </a>
 
 
 {% endblock content %}

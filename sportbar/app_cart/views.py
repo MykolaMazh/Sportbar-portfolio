@@ -66,7 +66,7 @@ class OrdersList(LoginRequiredMixin, ListView):
     template_name = "cart/order_list.html"
 
     def get_queryset(self):
-        return Order.objects.filter(client=self.request.user.id)
+        return Order.objects.filter(client=self.request.user)
 
 
 
