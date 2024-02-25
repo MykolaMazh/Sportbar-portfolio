@@ -21,8 +21,10 @@
     </form>
   {% else %}
     <form class="form-added"">
-      <h1>We've received your order.</h1>
-      <a href=""><button type="button" class="btn btn-info">Go to your orders</button></a>
+    <h1>We've received your order.</h1>
+    <a href="{% url 'cart:orders-list' %}">
+      <button type="button" class="btn btn-info">Go to your orders</button>
+    </a>
     </form>
   {% endif %}
 {% endblock %}

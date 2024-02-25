@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import View
+from django.views.generic import View, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from app_cart.forms import CartAddProductForm, OrderForm
-from app_cart.models import Cart, OrderItem
+from app_cart.models import Cart, OrderItem, Order
 from app_sportbar.models import MenuPosition
 
 
@@ -57,6 +58,15 @@ class CreateOrder(View):
                                          quantity=item['quantity'])
             cart_instance.clear()
         return render(request, 'cart/order_form.html', {'order_form': order_form})
+
+
+
+class OrdersList(LoginRequiredMixin, ListView):
+    model = Order
+    template_name = "cart/order_list.html"
+
+    def get_queryset(self):
+        return Order.objects.filter(client=self.request.user.id)
 
 
 
