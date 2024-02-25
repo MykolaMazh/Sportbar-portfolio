@@ -11,12 +11,12 @@ def cart(request):
     return render(request, "cart/cart.html", {"cart_instance":cart})
 
 
-def cart_add(request, slug):
+def cart_add(request, id):
     cart = Cart(request)
     form = CartAddProductForm(request.POST)
     if form.is_valid():
         cart.add(
-            product=MenuPosition.objects.get(slug=slug),
+            product=MenuPosition.objects.get(pk=id),
             **form.cleaned_data)
         print(cart.cart)
         for item in cart.cart.values():

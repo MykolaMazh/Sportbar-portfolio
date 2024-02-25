@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+
 {% block title %}
 Your shopping cart
 {% endblock %}
@@ -38,8 +38,8 @@ Your shopping cart
           <form action="{% url 'cart:add-to-cart' item.product.pk %}" method="post" class="editQuantityForm">
             <span class="quantityReal" id="{{item.product.id}}_quantity">{{item.quantity}}</span>
             {% csrf_token %}
-            <input type="number" name="quantity" min="1" required="" value="{{item.quantity}}" style="display: none;" class="quantityEdit">
-            <input type="hidden" name="update" value="True">
+            <input type="number" name="quantity" min="1" required="" value="{{item.quantity}}" style="display: none; width: 3em; color: #371219" class="quantityEdit">
+            <input type="hidden" name="update_quantity" value="True">
             <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold quantityReal" onclick="editQuantity(event)">
               Edit
             </button>
@@ -71,7 +71,28 @@ Your shopping cart
 </div>
 
 
+<script >
+// show and hide editQuantityForm while press edit
+function editQuantity(event){
+  for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityEdit')){
+    element.style.display="inline-block"
+  }
+  for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityReal')){
+    element.style.display = 'none'
+  }
+}
 
-
+// show and hide editQuantityForm while press confirm/close
+function confirmClose(event){
+  event.preventDefault(event);
+  // show and hide editQuantityForm
+  for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityEdit')){
+    element.setAttribute('style', 'display:none;')
+  }
+  for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityReal')){
+  element.style.display = 'inline-block'
+  }
+}
+</script>
 
 {% endblock content %}
