@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% for object in object_list %}
+<div class="table-responsive" style="border: 2px white groove; margin:25px; padding: 15px;">
+    <div class="class="d-flex justify-content-start">
+        <div>
+            Order{{object.pk}}
+        </div>
+        <div>
+            {{object.created_at}}
+        </div>
+        <div>
+        
+            {% if object.is_delivered %}
+            <i class="fas fa-check " style="color: rgb(121, 248, 10);"> Delivered</i>
+            {% else %}
+            <i class="fas fa-car-side" style="color: red;"> NOT delivered</i>
+            {% endif %}
+        </div>
+        <div>
+        
+            {% if object.is_paid %}
+            <i class="fas fa-check" style="color: rgb(121, 248, 10);"> Paid</i>
+            {% else %}
+            <i class="fas fa-credit-card" style="color: red;"> NOT paid</i>
+            {% endif %}
+        </div>
+    </div>
+    
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+            <tr>
+                <th>#</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for order_item in object.order_items.all %}
+
+
+            <tr>
+                <td>
+                    {{forloop.counter}}
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img src="{{order_item.product.image.url}}" alt="" style="width: 45px; height: 45px"
+                            class="rounded-circle" />
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">{{order_item.product.title}}</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <p class="fw-normal mb-1">{{order_item.price}}$</p>
+                </td>
+                <td>
+                    <p class="fw-normal mb-1">{{order_item.quantity}}</p>
+                </td>
+                <td>
+                    <p class="fw-normal mb-1">{{order_item.get_cost}}$</p>
+                </td>
+                <td>
+                   
+                </td>
+            </tr>
+
+
+            {% endfor %}
+            <tr>
+                <td colspan="4">
+                    <b>TOTAL</b>
+                </td>
+                <td><b id="cart_total_cost">{{object.get_total_cost}}$</b></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endfor %}
+
+{% endblock %}
