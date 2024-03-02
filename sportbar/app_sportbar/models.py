@@ -65,7 +65,7 @@ class BookedTable(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    phone = models.BigIntegerField(validators=[RegexValidator(
+    phone = models.TextField(validators=[RegexValidator(
         regex=r'^\d{10}$',
         message="phone number should consists of 10 figures")
     ]

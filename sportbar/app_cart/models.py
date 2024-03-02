@@ -74,7 +74,7 @@ class Cart:
 
 class Order(models.Model):
     client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
-    phone = models.BigIntegerField(validators=[RegexValidator(
+    phone = models.TextField(validators=[RegexValidator(
         regex=r'^\d{10}$',
         message="phone number should consists of 10 figures")
     ]
