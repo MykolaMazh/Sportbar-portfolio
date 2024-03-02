@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
 
@@ -58,9 +59,14 @@ class Client(AbstractUser):
 
 
 
+
 class BookedTable(models.Model):
-    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    datatime_booked = models.DateTimeField(verbose_name='Choose a date.')
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    phone = models.TextField()
+    phone = models.BigIntegerField(validators=[RegexValidator(
+        regex=r'^\d{10}$',
+        message="phone number should consists of 10 figures")
+    ]
+    )

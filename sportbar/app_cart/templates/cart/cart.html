@@ -3,6 +3,7 @@
   Your shopping cart
 {% endblock %}
 {% block content %}
+
   {% load cart_custom_tags %}
   {% cart_length as cart_length %}
   {% if cart_length %}

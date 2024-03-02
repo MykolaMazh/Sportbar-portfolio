@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import RegexValidator
 
 from app_cart.models import Order
 
@@ -9,6 +10,10 @@ class CartAddProductForm(forms.Form):
 
 
 class OrderForm(forms.ModelForm):
+    phone = forms.CharField(validators=[RegexValidator(
+        regex=r'^\d{10}$',
+        message="phone number should consists of 10 figures")
+    ])
     class Meta:
         model = Order
         fields = ("deliver_by",'address', "phone")

@@ -12,7 +12,9 @@
     <li>
       <a href="#home">
         <button type="button" class="btn btn-success">{{request.user}}
+          {% if request.user.avatar %}
           <img src="{{request.user.avatar.url}}" width="30">
+            {% endif %}
         </button>
       </a>
     </li>

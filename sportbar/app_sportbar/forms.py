@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.core.validators import RegexValidator
 
 from app_sportbar.models import BookedTable
 
@@ -18,11 +19,15 @@ class ClientCreationForm(UserCreationForm):
         fields = ("username", "password1", "password2", "avatar")
 
 
-class BookTableForm(forms.ModelForm):
+class BookedTableForm(forms.ModelForm):
+    phone = forms.CharField(validators= [RegexValidator(
+        regex=r'^\d{10}$',
+        message="phone number should consists of 10 figures")
+    ])
     class Meta:
         model = BookedTable
-        fields = ['datatime_booked', 'phone']
+        fields = ['phone', "match", "client"]
         widgets = {
-            'datatime_booked': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'phone': forms.NumberInput(attrs={'type': 'tel'})
+            "match": forms.HiddenInput(),
+            "client": forms.HiddenInput()
         }
