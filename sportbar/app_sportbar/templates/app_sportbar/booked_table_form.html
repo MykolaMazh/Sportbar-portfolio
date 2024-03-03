@@ -1,11 +1,62 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 {% block content %}
-<h1 class="form-added">We need your phone number to confirm your reservation </h1>
-	<form class="form-added" method="post">
-  {% csrf_token %}
-    {{form|crispy}}
-  <button type="submit" class="btn-success ">Book a table</button>
+  <h1 class="form-added">We need your phone number to confirm your reservation </h1>
+  <form class="form-added" method="post" id="book_table_form">
+    {% csrf_token %}
+    {{ form|crispy }}
+    --------
+    <div id="phoneError"></div>
+    --------
+
+
+    <button type="submit" class="btn-success ">Book a table</button>
   </form>
+
+  <!-- Modal -->
+  <div class="modal form-added" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true" style="left: 24%; display: none">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        </div>
+        <div class="modal-body" id="timeGap">
+
+        </div>
+        <div class="modal-footer">
+          <a href="{% url 'sportbar:home' %}">
+            <button type="button" class="btn btn-primary">Cool!!!</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End-Modal -->
+  <script>
+      function sendRequestFetchPost(method, url, body) {
+          fetch(url, {
+              method: method,
+              body: body,
+              headers: {"X-Requested-With": "XMLHttpRequest"}
+          })
+              .then((response) => response.json())
+              .then((data) => {
+                  if (data.message == "success") {
+                      staticBackdrop.style.display = "block"
+                      staticBackdropLabel.innerText = `You have successfully booked table for ${data.match}!
+                      We wish your team to win.`;
+                      phoneError.innerText = '';
+                      timeGap.innerText = `Your table is available from ${data.from} till ${data.to}`
+                  } else {
+                      phoneError.innerText = 'Valid phone number consists of 10 digits';
+                  }
+              })
+      }
+      book_table_form.addEventListener('submit', function fetchSubmit(event) {
+          event.preventDefault();
+          sendRequestFetchPost("POST", this.action, new FormData(this))
+      })
+  </script>
 
 {% endblock %}

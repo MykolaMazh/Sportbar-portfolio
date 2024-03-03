@@ -1,4 +1,8 @@
+from datetime import timedelta
+
+from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
 
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -20,6 +24,7 @@ def index(request):
         }
     )
 
+
 class CategoryDetailView(DetailView):
     model = Category
 
@@ -35,7 +40,6 @@ class ClientCreateView(CreateView):
     success_url = reverse_lazy("login")
 
 
-
 class BookedTableCreateView(CreateView):
     form_class = BookedTableForm
     template_name = "app_sportbar/booked_table_form.html"
@@ -43,10 +47,30 @@ class BookedTableCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.method == "GET":
-            initial_data = {"match":self.kwargs["match_id"]}
-            if self.request.user.is_authenticated:
-                initial_data["client"] = self.request.user
-            context["form"] = BookedTableForm(initial_data)
+        initial_data = {"match": self.kwargs["match_id"]}
+        if self.request.user.is_authenticated:
+            initial_data["client"] = self.request.user
+        context["form"] = BookedTableForm(initial_data)
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = BookedTableForm(self.request.POST)
+        print("fxd")
+        if form.is_valid():
+            booked_table = form.save()
+            match = booked_table.match.title
+            booked_time = booked_table.match.event_date
+            before = timedelta(hours=1)
+            after = timedelta(hours=2.5)
+
+            print(type(booked_time))
+            return JsonResponse(
+                {
+                    "message": "success",
+                    "match": match,
+                    "from": (booked_time - before).strftime("%Y.%m.%d %H:%M"),
+                    "to": (booked_time + after).strftime("%Y.%m.%d %H:%M")
+                }, status=200)
+        else:
+            return JsonResponse({"message": "error"}, status=200)
 
