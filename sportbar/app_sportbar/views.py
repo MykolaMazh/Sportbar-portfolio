@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 
 from django.shortcuts import render
@@ -40,7 +41,7 @@ class ClientCreateView(CreateView):
     success_url = reverse_lazy("login")
 
 
-class BookedTableCreateView(CreateView):
+class BookedTableCreateView(LoginRequiredMixin, CreateView):
     form_class = BookedTableForm
     template_name = "app_sportbar/booked_table_form.html"
     success_url = reverse_lazy("sportbar:home")
