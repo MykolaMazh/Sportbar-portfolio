@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 {% block content %}
-  <h1 class="form-added">We need your phone number to confirm your reservation </h1>
+  <h1 class="form-added" id="matchUserConstraint">We need your phone number to confirm your reservation </h1>
   <form class="form-added" method="post" id="book_table_form">
     {% csrf_token %}
     {{ form|crispy }}
@@ -9,7 +9,11 @@
     <button type="submit" class="btn-success ">Book a table</button>
   </form>
 
-  <!-- Modal -->
+  {#  Start-error if no table available#}
+  <div class="form-added" id="excessError">{{ excess_error }}</div>
+  {#  End-error if no table available#}
+
+  <!-- Start-Modal -->
   <div class="modal form-added" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="left: 24%; display: none">
     <div class="modal-dialog">
@@ -29,7 +33,24 @@
     </div>
   </div>
   <!-- End-Modal -->
+
   <script>
+
+      {#Start-check if already the match booked from Uniqueconstraint#}
+      if (document.querySelector(".alert.alert-block.alert-danger")) {
+          book_table_form.style.display = "none";
+          matchUserConstraint.innerText = " You have already booked table for this match"
+      }
+      {#End-check if already the match booked from Uniqueconstraint#}
+
+      <!--Start-not display form if excessError-->
+      if(document.getElementById("excessError").innerText){
+          book_table_form.style.display = "none"
+          matchUserConstraint.style.display = "none"
+      }
+      <!--End-enot display form if excessError-->
+
+      {#Start-send fetch request for modal confirmation#}
       function sendRequestFetchPost(method, url, body) {
           fetch(url, {
               method: method,
@@ -49,10 +70,12 @@
                   }
               })
       }
+
       book_table_form.addEventListener('submit', function fetchSubmit(event) {
           event.preventDefault();
           sendRequestFetchPost("POST", this.action, new FormData(this))
       })
+      {#End-send fetch request for modal confirmation#}
   </script>
 
 {% endblock %}

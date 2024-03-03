@@ -48,10 +48,14 @@ class BookedTableCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        initial_data = {"match": self.kwargs["match_id"]}
-        if self.request.user.is_authenticated:
-            initial_data["client"] = self.request.user
-        context["form"] = BookedTableForm(initial_data)
+        if BookedTable.objects.filter(match_id=self.kwargs["match_id"]).count() < 15:
+            initial_data = {"match": self.kwargs["match_id"]}
+            if self.request.user.is_authenticated:
+                initial_data["client"] = self.request.user
+            context["form"] = BookedTableForm(initial_data)
+        else:
+            del context["form"]
+            context["excess_error"] = "Everything is booked for this game."
         return context
 
     def post(self, request, *args, **kwargs):

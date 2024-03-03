@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models import UniqueConstraint
 from django.urls import reverse
 
 class Category(models.Model):
@@ -68,3 +69,11 @@ class BookedTable(models.Model):
         message="phone number should consists of 10 figures")
     ]
     )
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(
+                fields=["client", "match"],
+                name="this match is already booked",
+                )
+        ]
