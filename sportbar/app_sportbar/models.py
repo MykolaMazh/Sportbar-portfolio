@@ -58,8 +58,6 @@ class Client(AbstractUser):
     avatar = models.ImageField(upload_to='images/avatars/%Y/%m/%d', blank=True, null=True, max_length=250)
 
 
-
-
 class BookedTable(models.Model):
     client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)

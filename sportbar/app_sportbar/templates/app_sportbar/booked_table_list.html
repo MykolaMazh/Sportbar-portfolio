@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load sportbar_custom_tags %}
+{% block content %}
+
+
+<table class="table align-middle mb-0 bg-white form-added">
+  <thead class="bg-light">
+  <tr>
+    <th>#</th>
+    <th>Event</th>
+    <th>Kick off</th>
+    <th>Booked time</th>
+    <th>Change</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  {% for booked_table in object_list %}
+
+
+    <tr>
+      <td>
+        {{ forloop.counter }}
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          <img src="{{ booked_table.match.poster.url }}" alt="" style="width: 45px; height: 45px"
+               class="rounded-circle"/>
+          <div class="ms-3">
+            <p class="fw-bold mb-1">{{ booked_table.match.title}}</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">{{ booked_table.match.event_date|date:"l - M j Y g.i A"  }}</p>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">{{ booked_table.match.event_date|duration_filter  }}</p>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">
+          <a href="">
+          <button type="button" class="btn btn-secondary">Change</button></a></p>
+      </td>
+      <td>
+        <p class="fw-normal mb-1">
+          <a href="">
+          <button type="button" class="btn btn-danger">Delete</button></a></p>
+      </td>
+    </tr>
+
+
+  {% endfor %}
+
+  </tbody>
+</table>
+</div>
+
+
+
+{% endblock %}

@@ -7,11 +7,11 @@ from django.http import JsonResponse
 
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, ListView
 
 from app_cart.forms import CartAddProductForm
 from .forms import ClientCreationForm, BookedTableForm
-from .models import Category, Match, Championship
+from .models import Category, Match, Championship, BookedTable
 
 
 def index(request):
@@ -69,9 +69,20 @@ class BookedTableCreateView(LoginRequiredMixin, CreateView):
                 {
                     "message": "success",
                     "match": match,
-                    "from": (booked_time - before).strftime("%Y.%m.%d %H:%M"),
-                    "to": (booked_time + after).strftime("%Y.%m.%d %H:%M")
+                    "from": (booked_time - before).strftime("%Y %B %d %H:%M"),
+                    "to": (booked_time + after).strftime("%Y %B %d %H:%M")
                 }, status=200)
         else:
             return JsonResponse({"message": "error"}, status=200)
+
+
+class BookedTableListView(LoginRequiredMixin, ListView):
+    model = BookedTable
+    template_name = "app_sportbar/booked_table_list.html"
+
+    def get_queryset(self):
+        return self.model.objects.filter(client=self.request.user)
+
+
+
 
