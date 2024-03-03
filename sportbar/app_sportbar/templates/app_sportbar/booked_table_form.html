@@ -5,11 +5,7 @@
   <form class="form-added" method="post" id="book_table_form">
     {% csrf_token %}
     {{ form|crispy }}
-    --------
     <div id="phoneError"></div>
-    --------
-
-
     <button type="submit" class="btn-success ">Book a table</button>
   </form>
 
