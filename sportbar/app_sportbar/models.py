@@ -6,6 +6,7 @@ from django.db import models
 from django.db.models import UniqueConstraint
 from django.urls import reverse
 
+
 class Category(models.Model):
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/%Y/%m/%d', max_length=100,
@@ -32,6 +33,7 @@ class MenuPosition(models.Model):
     def __str__(self):
         return self.title
 
+
 class Match(models.Model):
     title = models.CharField(max_length=250)
     championship = models.ForeignKey(
@@ -41,10 +43,9 @@ class Match(models.Model):
     event_date = models.DateTimeField()
     preview = models.TextField()
     poster = models.ImageField(upload_to='images/match_poster/%Y/%m/%d', max_length=100,
-                              blank=True)
+                               blank=True)
 
     def __str__(self):
-
         return f"{self.title} - {self.event_date.strftime('%M/%d %H:%M')}"
 
 
@@ -64,10 +65,12 @@ class BookedTable(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    phone = models.TextField(validators=[RegexValidator(
-        regex=r'^\d{10}$',
-        message="phone number should consists of 10 figures")
-    ]
+    phone = models.CharField(
+        max_length=10,
+        validators=[RegexValidator(
+            regex=r'^\d{10}$',
+            message="phone number should consists of 10 figures")
+        ]
     )
 
     class Meta:
@@ -75,5 +78,5 @@ class BookedTable(models.Model):
             UniqueConstraint(
                 fields=["client", "match"],
                 name="this match is already booked",
-                )
+            )
         ]

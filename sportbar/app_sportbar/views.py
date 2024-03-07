@@ -3,11 +3,12 @@ from datetime import timedelta
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import IntegrityError
 from django.http import JsonResponse
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, CreateView, ListView
+from django.views.generic import DetailView, CreateView, ListView, UpdateView
 
 from app_cart.forms import CartAddProductForm
 from .forms import ClientCreationForm, BookedTableForm
@@ -67,8 +68,6 @@ class BookedTableCreateView(LoginRequiredMixin, CreateView):
             booked_time = booked_table.match.event_date
             before = timedelta(hours=1)
             after = timedelta(hours=2.5)
-
-            print(type(booked_time))
             return JsonResponse(
                 {
                     "message": "success",
@@ -88,5 +87,18 @@ class BookedTableListView(LoginRequiredMixin, ListView):
         return self.model.objects.filter(client=self.request.user)
 
 
-
-
+class BookedTableUpdateView(LoginRequiredMixin, UpdateView):
+    model = BookedTable
+    fields = ("match", "phone")
+    template_name = "app_sportbar/booked_table_update.html"
+    success_url = reverse_lazy("sportbar:home")
+    
+    def post(self, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+            self.object.phone = self.request.POST.get("phone")
+            self.object.match_id = self.request.POST.get("match")
+            self.object.save()
+        except IntegrityError:
+            pass
+        return  redirect("http://127.0.0.1:8000/booked_table_list/")

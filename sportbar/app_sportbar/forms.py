@@ -10,9 +10,8 @@ class ClientCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        for fieldname in ['username', 'password1', 'password2']:
+        for fieldname in ["username", "password1", "password2"]:
             self.fields[fieldname].help_text = None
-
 
     class Meta:
         model = get_user_model()
@@ -20,10 +19,11 @@ class ClientCreationForm(UserCreationForm):
 
 
 class BookedTableForm(forms.ModelForm):
-    phone = forms.CharField(validators= [RegexValidator(
+    phone = forms.CharField(validators=[RegexValidator(
         regex=r'^\d{10}$',
         message="phone number should consists of 10 figures")
     ])
+
     class Meta:
         model = BookedTable
         fields = ['phone', "match", "client"]
