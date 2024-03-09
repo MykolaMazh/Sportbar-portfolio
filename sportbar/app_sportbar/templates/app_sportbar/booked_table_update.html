@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_filters %}
+
 {% block content %}
+<h1>Here you can change the match you booked table for.</h1>
   <form method="post" class="form-added">
   {% csrf_token %}
   {{ form|crispy }}
-  <button type="submit">Change match</button>
+  <button type="submit" class="btn btn-success">Change match</button>
   </form>
 {% endblock %}

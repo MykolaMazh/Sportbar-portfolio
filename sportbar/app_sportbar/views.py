@@ -8,7 +8,8 @@ from django.http import JsonResponse
 
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, CreateView, ListView, UpdateView
+from django.views.generic import DetailView, CreateView, ListView, UpdateView, \
+    DeleteView
 
 from app_cart.forms import CartAddProductForm
 from .forms import ClientCreationForm, BookedTableForm
@@ -102,3 +103,9 @@ class BookedTableUpdateView(LoginRequiredMixin, UpdateView):
         except IntegrityError:
             pass
         return  redirect("http://127.0.0.1:8000/booked_table_list/")
+
+
+class BookedTableDeleteView(LoginRequiredMixin, DeleteView):
+    model = BookedTable
+    template_name = "app_sportbar/booked_table_delete.html"
+    success_url = "/"
