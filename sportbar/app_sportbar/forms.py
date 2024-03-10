@@ -16,19 +16,19 @@ class ClientCreationForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ("username", "password1", "password2", "avatar")
-       
 
 
 class BookedTableForm(forms.ModelForm):
-    phone = forms.CharField(validators=[RegexValidator(
-        regex=r'^\d{10}$',
-        message="phone number should consists of 10 figures")
-    ])
+    phone = forms.CharField(
+        validators=[
+            RegexValidator(
+                regex=r"^\d{10}$",
+                message="phone number should consists of 10 figures"
+            )
+        ]
+    )
 
     class Meta:
         model = BookedTable
-        fields = ['phone', "match", "client"]
-        widgets = {
-            "match": forms.HiddenInput(),
-            "client": forms.HiddenInput()
-        }
+        fields = ["phone", "match", "client"]
+        widgets = {"match": forms.HiddenInput(), "client": forms.HiddenInput()}

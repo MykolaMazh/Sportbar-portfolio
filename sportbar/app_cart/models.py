@@ -8,7 +8,6 @@ from app_sportbar.models import MenuPosition
 
 
 class Cart:
-
     def __init__(self, request):
         # current session
         self.session = request.session
@@ -26,33 +25,36 @@ class Cart:
 
         # freeze the current price
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0,
-                                     'price': str(product.price)}
+            self.cart[product_id] = {
+                "quantity": 0,
+                "price": str(product.price)
+            }
 
         if update_quantity:
-            self.cart[product_id]['quantity'] = quantity
+            self.cart[product_id]["quantity"] = quantity
         else:
-            self.cart[product_id]['quantity'] += quantity
+            self.cart[product_id]["quantity"] += quantity
 
         self.save()
-
 
     def __iter__(self):
         product_ids = self.cart.keys()
         # getting products from model
         products = MenuPosition.objects.filter(id__in=product_ids)
         for product in products:
-            self.cart[str(product.id)]['product'] = product
+            self.cart[str(product.id)]["product"] = product
 
         for item in self.cart.values():
-            item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
+            item["price"] = Decimal(item["price"])
+            item["total_price"] = item["price"] * item["quantity"]
             yield item
 
     def get_total_cost(self):
-    # the cart total cost
-        return sum(Decimal(item['price']) * item['quantity'] for item in
-               self.cart.values())
+        # the cart total cost
+        return sum(
+            Decimal(item["price"])
+            * item["quantity"] for item in self.cart.values()
+        )
 
     def save(self):
         # update session. it's a dict now
@@ -65,7 +67,7 @@ class Cart:
             self.save()
 
     def __len__(self):
-        return sum(item['quantity'] for item in self.cart.values())
+        return sum(item["quantity"] for item in self.cart.values())
 
     def clear(self):
         # delete the cart from session
@@ -73,11 +75,16 @@ class Cart:
 
 
 class Order(models.Model):
-    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
-    phone = models.TextField(validators=[RegexValidator(
-        regex=r'^\d{10}$',
-        message="phone number should consists of 10 figures")
-    ]
+    client = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True
+    )
+    phone = models.TextField(
+        validators=[
+            RegexValidator(
+                regex=r"^\d{10}$",
+                message="phone number should consists of 10 figures"
+            )
+        ]
     )
     address = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -91,25 +98,26 @@ class Order(models.Model):
         return sum(item.get_cost() for item in self.order_items.all())
 
     def __str__(self):
-        return 'Order {}'.format(self.id)
+        return "Order {}".format(self.id)
 
     class Meta:
-        ordering = ('-created_at',)
+        ordering = ("-created_at",)
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name='order_items', on_delete=models.CASCADE)
-    product = models.ForeignKey(MenuPosition, related_name='products_in_order', on_delete=models.CASCADE)
+    order = models.ForeignKey(
+        Order, related_name="order_items", on_delete=models.CASCADE
+    )
+    product = models.ForeignKey(
+        MenuPosition,
+        related_name="products_in_order",
+        on_delete=models.CASCADE
+    )
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField()
 
     def __str__(self):
-        return '{}'.format(self.id)
+        return "{}".format(self.id)
 
     def get_cost(self):
         return self.price * self.quantity
-
-
-
-
-

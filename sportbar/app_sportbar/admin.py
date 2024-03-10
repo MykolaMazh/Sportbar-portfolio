@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import *
+from .models import Category, MenuPosition, Match, Client, Championship
+
 
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug':('title',)}
+    prepopulated_fields = {"slug": ("title",)}
+
 
 class MenuPositionAdmin(admin.ModelAdmin):
     save_as = True
@@ -10,6 +12,7 @@ class MenuPositionAdmin(admin.ModelAdmin):
 
 class MatchAdmin(admin.ModelAdmin):
     save_as = True
+
 
 admin.site.register(MenuPosition, MenuPositionAdmin)
 admin.site.register(Category, CategoryAdmin)
