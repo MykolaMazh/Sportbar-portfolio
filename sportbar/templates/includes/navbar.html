@@ -1,6 +1,10 @@
 {% load static %}
+
 {% load cart_custom_tags %}
 {% cart_length as cart_length %}
+
+{% load sportbar_custom_tags %}
+{% booked_tables_quantity as booked_tables_quantity %}
 <!-- Main navigation -->
 <div class="nav-collapse collapse pull-right">
   <ul class="nav" id="top-navigation">
@@ -9,48 +13,56 @@
     <li><a href="{% url 'sportbar:home' %}#categories">Delivery</a></li>
     <li><a href="{% url 'sportbar:home' %}#contact">Contact</a></li>
     {% if request.user.is_authenticated %}
-    <li>
-      <a href="#home">
-        <button type="button" class="btn btn-success">{{request.user}}
-          {% if request.user.avatar %}
-          <img src="{{request.user.avatar.url}}" width="30">
+      <li>
+        <a href="#home">
+          <button type="button" class="btn btn-success">{{ request.user }}
+            {% if request.user.avatar %}
+              <img src="{{ request.user.avatar.url }}" width="30">
             {% endif %}
-        </button>
-      </a>
-    </li>
-    <li>
-      <a href="{% url 'logout' %}">
-        <button type="button" class="btn btn-success">Logout</button>
-      </a>
-    </li>
+          </button>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'logout' %}">
+          <button type="button" class="btn btn-success">Logout</button>
+        </a>
+      </li>
+       <li>
+        <a href="{% url 'sportbar:booked-table-list' %}">
+          {% if request.user.booked_tables %}
+            {{ booked_tables_quantity }}
+            <img src="{% static 'app_sportbar/images/tickets.png' %}" width="30">
+          {% endif %}
+        </a>
+      </li>
     {% else %}
-    <li>
-      <a href="{% url 'sportbar:register' %}">
-        <button type="button" class="btn btn-success">Register</button>
-      </a>
-    </li>
-    <li>
-      <a href="{% url 'login' %}">
-        <button type="button" class="btn btn-success">Log in</button>
-      </a>
-    </li>
+      <li>
+        <a href="{% url 'sportbar:register' %}">
+          <button type="button" class="btn btn-success">Register</button>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'login' %}">
+          <button type="button" class="btn btn-success">Log in</button>
+        </a>
+      </li>
     {% endif %}
     <li>
       <a href="{% url 'cart:cart' %}">
-        
+
         {% if cart_length %}
-          {%  cart_length %}
-        	<img src="{% static 'app_cart/images/cart.png' %}" width="30">
+          {% cart_length %}
+          <img src="{% static 'app_cart/images/cart.png' %}" width="30">
         {% else %}
           <img src="{% static 'app_cart/images/empty_cart.png' %}" width="30">
-        {% endif %} 
-          
-        
+        {% endif %}
+
+
       </a>
     </li>
+
   </ul>
 
 </div>
 
 <!-- End main navigation -->
-

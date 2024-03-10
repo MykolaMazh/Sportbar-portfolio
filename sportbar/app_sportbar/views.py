@@ -62,7 +62,6 @@ class BookedTableCreateView(LoginRequiredMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         form = BookedTableForm(self.request.POST)
-        print("fxd")
         if form.is_valid():
             booked_table = form.save()
             match = booked_table.match.title

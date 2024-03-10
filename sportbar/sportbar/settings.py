@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "debug_toolbar",
+    "django_extensions",
     "crispy_forms",
     "crispy_bootstrap4",
     "app_sportbar.apps.AppSportbarConfig",
