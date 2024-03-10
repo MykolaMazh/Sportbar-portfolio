@@ -1,123 +1,123 @@
 {% extends "base.html" %}
 {% block title %}
-  Your shopping cart
+Your shopping cart
 {% endblock %}
 {% block content %}
 
-  {% load cart_custom_tags %}
-  {% cart_length as cart_length %}
-  {% if cart_length %}
+{% load cart_custom_tags %}
+{% cart_length as cart_length %}
+{% if cart_length %}
 
-    <h1>Your shopping cart</h1>
-    <div class="table-responsive" style="background-color: #1b1b1b">
-      <table class="table align-middle mb-0 bg-white">
-        <thead class="bg-light">
-        <tr>
-          <th>#</th>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total price</th>
-          <th>Remove</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for item in cart_instance %}
-          <tr>
-            <td>
-              {{ forloop.counter }}
-            </td>
-            <td>
-              <div class="d-flex align-items-center">
-                <img src="{{ item.product.image.url }}" alt="" style="width: 45px; height: 45px"
-                     class="rounded-circle"/>
-                <div class="ms-3">
-                  <p class="fw-bold mb-1">{{ item.product.title }}</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <p class="fw-normal mb-1">{{ item.price }}$</p>
-            </td>
-            <td>
-              <form action="{% url 'cart:add-to-cart' item.product.pk %}" method="post" class="editQuantityForm">
-                <span class="quantityReal" id="{{ item.product.id }}_quantity">{{ item.quantity }}</span>
-                {% csrf_token %}
-                <input type="number" name="quantity" min="1" required="" value="{{ item.quantity }}"
-                       style="display: none; width: 3em; color: #371219" class="quantityEdit">
-                <input type="hidden" name="update_quantity" value="True">
-                <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold quantityReal"
-                        onclick="editQuantity(event)">
-                  Edit
-                </button>
-                <button type="submit" class="btn btn-link btn-rounded btn-sm fw-bold quantityEdit"
-                        style="display: none;">
-                  Confirm
-                </button>
-                <button type="button" class="back btn btn-link btn-rounded btn-sm fw-bold quantityEdit"
-                        style="display: none;" onclick="confirmClose(event)">
-                  Back
-                </button>
-              </form>
-            </td>
-            <td>
-              <p class="fw-normal mb-1" id="{{ item.product.id }}_total_price">{{ item.total_price }}$</p>
-            </td>
-            <td>
-              <a href="{% url 'cart:move-off-cart' item.product.pk %}">
-                <button type="button" class="btn btn-danger btn-rounded" data-mdb-ripple-color="dark">Remove
-                  from cart
-                </button>
-              </a>
-            </td>
-          </tr>
+<h1>Your shopping cart</h1>
+<div class="table-responsive" style="background-color: #1b1b1b">
+  <table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>#</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total price</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_instance %}
+      <tr>
+        <td>
+          {{ forloop.counter }}
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            <img src="{{ item.product.image.url }}" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{ item.product.title }}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{ item.price }}$</p>
+        </td>
+        <td>
+          <form action="{% url 'cart:add-to-cart' item.product.pk %}" method="post" class="editQuantityForm">
+            <span class="quantityReal" id="{{ item.product.id }}_quantity">{{ item.quantity }}</span>
+            {% csrf_token %}
+            <input type="number" name="quantity" min="1" required="" value="{{ item.quantity }}"
+              style="display: none; width: 3em; color: #371219" class="quantityEdit">
+            <input type="hidden" name="update_quantity" value="True">
+            <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold quantityReal"
+              onclick="editQuantity(event)">
+              Edit
+            </button>
+            <button type="submit" class="btn btn-link btn-rounded btn-sm fw-bold quantityEdit" style="display: none;">
+              Confirm
+            </button>
+            <button type="button" class="back btn btn-link btn-rounded btn-sm fw-bold quantityEdit"
+              style="display: none;" onclick="confirmClose(event)">
+              Back
+            </button>
+          </form>
+        </td>
+        <td>
+          <p class="fw-normal mb-1" id="{{ item.product.id }}_total_price">{{ item.total_price }}$</p>
+        </td>
+        <td>
+          <a href="{% url 'cart:move-off-cart' item.product.pk %}">
+            <button type="button" class="btn btn-danger btn-rounded" data-mdb-ripple-color="dark">Remove
+              from cart
+            </button>
+          </a>
+        </td>
+      </tr>
 
-        {% endfor %}
-        <tr>
-          <td colspan="4">
-            <b>TOTAL</b>
-          </td>
-          <td><b id="cart_total_cost">{{ cart_instance.get_total_cost }}$</b></td>
-        </tr>
-        </tbody>
-      </table>
-      <div style="margin: 0 auto; width: fit-content"><a href="{% url 'cart:order-form' %}">
-        <button type="button" class="btn btn-success">Order</button>
-      </a></div>
-    </div>
+      {% endfor %}
+      <tr>
+        <td colspan="4">
+          <b>TOTAL</b>
+        </td>
+        <td><b id="cart_total_cost">{{ cart_instance.get_total_cost }}$</b></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin: 0 auto; width: fit-content"><a href="{% url 'cart:order-form' %}">
+      <button type="button" class="btn btn-centered btn-success">Order</button>
+    </a></div>
+</div>
 
 
 
-    <script>
-        // show and hide editQuantityForm while press edit
-        function editQuantity(event) {
-            for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityEdit')) {
-                element.style.display = "inline-block"
-            }
-            for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityReal')) {
-                element.style.display = 'none'
-            }
-        }
+<script>
+  // show and hide editQuantityForm while press edit
+  function editQuantity(event) {
+    for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityEdit')) {
+      element.style.display = "inline-block"
+    }
+    for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityReal')) {
+      element.style.display = 'none'
+    }
+  }
 
-        // show and hide editQuantityForm while press confirm/close
-        function confirmClose(event) {
-            event.preventDefault(event);
-            // show and hide editQuantityForm
-            for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityEdit')) {
-                element.style.display = 'none'
-            }
-            for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityReal')) {
-                element.style.display = 'inline-block'
-            }
-        }
-    </script>
-  {% else %}
-    <div class="table-responsive" style="background-color: #1b1b1b"><h1>Your cart is empty</h1></div>
-  {% endif %}
+  // show and hide editQuantityForm while press confirm/close
+  function confirmClose(event) {
+    event.preventDefault(event);
+    // show and hide editQuantityForm
+    for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityEdit')) {
+      element.style.display = 'none'
+    }
+    for (let element of event.currentTarget.parentElement.getElementsByClassName('quantityReal')) {
+      element.style.display = 'inline-block'
+    }
+  }
+</script>
+{% else %}
+<div class="table-responsive" style="background-color: #1b1b1b">
+  <h1>Your cart is empty</h1>
+</div>
+{% endif %}
 
-  <a href="{% url 'cart:orders-list' %}">
-      <button type="button" class="btn btn-info">Go to your orders</button>
-    </a>
+<a href="{% url 'cart:orders-list' %}">
+  <button type="button" class="btn btn-centered btn-info">Go to your orders</button>
+</a>
 
 
 {% endblock content %}

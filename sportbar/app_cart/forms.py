@@ -5,7 +5,7 @@ from app_cart.models import Order
 
 
 class CartAddProductForm(forms.Form):
-    quantity = forms.IntegerField(min_value=1)
+    quantity = forms.IntegerField(min_value=1, widget=forms.NumberInput(attrs={"style": "width:10%"}))
     update_quantity = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 
 

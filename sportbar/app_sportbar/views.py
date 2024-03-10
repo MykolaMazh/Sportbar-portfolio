@@ -107,4 +107,4 @@ class BookedTableUpdateView(LoginRequiredMixin, UpdateView):
 class BookedTableDeleteView(LoginRequiredMixin, DeleteView):
     model = BookedTable
     template_name = "app_sportbar/booked_table_delete.html"
-    success_url = "/"
+    success_url = reverse_lazy("sportbar:booked-table-list")

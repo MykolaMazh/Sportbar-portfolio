@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 {% load sportbar_custom_tags %}
+
+
+{% block title %}
+Your events
+{% endblock title %}
+
 {% block content %}
+{% booked_tables_quantity as booked_tables_quantity %}
 
 
-  <table class="table align-middle mb-0 bg-white form-added">
-    <thead class="bg-light">
+{% if booked_tables_quantity > 0 %}
+
+
+<table class="table align-middle mb-0 bg-white form-added">
+  <thead class="bg-light">
     <tr>
       <th>#</th>
       <th>Event</th>
@@ -13,10 +23,12 @@
       <th>Change</th>
       <th>Delete</th>
     </tr>
-    </thead>
-    <tbody>
-
-    {% for booked_table in object_list %}
+  </thead>
+  <tbody>
+    {% if object_list == "<QuerySet []>" %}
+      oiuio
+      {% endif %}
+      {% for booked_table in object_list %}
       <tr>
         <td>
           {{ forloop.counter }}
@@ -24,7 +36,7 @@
         <td>
           <div class="d-flex align-items-center">
             <img src="{{ booked_table.match.poster.url }}" alt="" style="width: 45px; height: 45px"
-                 class="rounded-circle"/>
+              class="rounded-circle" />
             <div class="ms-3">
               <p class="fw-bold mb-1">{{ booked_table.match.title }}</p>
             </div>
@@ -40,17 +52,27 @@
           <p class="fw-normal mb-1">
             <a href="{% url 'sportbar:booked-table-update' booked_table.pk %}">
               <button type="button" class="btn btn-secondary">Change</button>
-            </a></p>
+            </a>
+          </p>
         </td>
         <td>
           <p class="fw-normal mb-1">
             <a href="{% url 'sportbar:booked-table-delete' booked_table.pk %}">
               <button type="button" class="btn btn-danger">Delete</button>
-            </a></p>
+            </a>
+          </p>
         </td>
       </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-  </div>
+      {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="form-added">
+  <h2>No matches selected</h2>
+  <a href="{% url 'sportbar:home' %}#matches">
+    <button type="button" class="btn btn-success">Select some</button>
+  </a>
+</div>
+{% endif %}
 {% endblock %}
