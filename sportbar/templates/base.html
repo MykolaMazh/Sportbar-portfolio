@@ -205,7 +205,7 @@
             <h3>{{category.title}}</h3>
             <div class="mask">
               <h2>{{category.description}}</h2>
-              <a href="{% url 'sportbar:category_detail' category.slug %}">
+              <a href="{{category.get_absolute_url}}">
                 <button type="button" class="btn btn-success">Choose and order {{category.title}}</button>
               </a>
             </div>

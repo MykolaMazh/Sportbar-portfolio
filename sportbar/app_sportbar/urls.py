@@ -16,7 +16,7 @@ urlpatterns = [
     path(
         "categories/<str:slug>",
         CategoryDetailView.as_view(),
-        name="category_detail"
+        name="category"
     ),
     path("register/", ClientCreateView.as_view(), name="register"),
     path(
