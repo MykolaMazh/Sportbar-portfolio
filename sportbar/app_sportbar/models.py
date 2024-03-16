@@ -47,9 +47,9 @@ class Match(models.Model):
     title = models.CharField(max_length=250)
     championship = models.ForeignKey("Championship", on_delete=models.CASCADE)
     event_date = models.DateTimeField()
-    preview = models.TextField()
+    preview = models.TextField(blank=True, null=True)
     poster = models.ImageField(
-        upload_to="images/match_poster/%Y/%m/%d", max_length=100, blank=True, null=True
+        upload_to="images/match_poster/%Y/%m/%d", max_length=100, blank=True, null=True, default="images/match_poster/stadium.jpg"
     )
 
     def __str__(self):
