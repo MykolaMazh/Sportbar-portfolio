@@ -1,7 +1,9 @@
+from decimal import Decimal
+
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import Category
+from .models import Category, MenuPosition
 
 
 class CategoryTest(TestCase):
@@ -20,3 +22,16 @@ class CategoryTest(TestCase):
                 "app_sportbar:category",
                 kwargs={"slug": self.obj.slug}
             ), self.obj.get_absolute_url())
+
+class MenuPositionTest(TestCase):
+    def test_str(self):
+        category = Category.objects.create(
+            title='Test Category',
+            slug='test-category'
+        )
+        obj = MenuPosition.objects.create(
+            title='Test MenuPosition',
+            price=Decimal('100.22'),
+            category=category
+        )
+        self.assertEqual(str(obj), obj.title)
