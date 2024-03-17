@@ -63,7 +63,7 @@ class BookedTableCreateView(LoginRequiredMixin, CreateView):
             context["form"] = BookedTableForm(initial_data)
         else:
             del context["form"]
-            context["excess_error"] = "Everything is booked for this game."
+            context["excess_error"] = "Everything is booked for this match."
         return context
 
     def post(self, request, *args, **kwargs):

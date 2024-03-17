@@ -12,7 +12,8 @@ class Category(models.Model):
         upload_to="images/%Y/%m/%d",
         max_length=100,
         blank=True,
-        null=True
+        null=True,
+        default="images/2024/02/17/beer.jpg",
     )
     description = models.CharField(max_length=150, blank=True, null=True)
     slug = models.SlugField(max_length=50)
@@ -32,10 +33,7 @@ class MenuPosition(models.Model):
         Category, on_delete=models.CASCADE, related_name="menu_positions"
     )
     image = models.ImageField(
-        upload_to="images/%Y/%m/%d",
-        max_length=100,
-        blank=True,
-        null=True
+        upload_to="images/%Y/%m/%d", max_length=100, blank=True, null=True
     )
     slug = models.SlugField(max_length=50, unique=True, blank=True, null=True)
 
@@ -49,7 +47,11 @@ class Match(models.Model):
     event_date = models.DateTimeField()
     preview = models.TextField(blank=True, null=True)
     poster = models.ImageField(
-        upload_to="images/match_poster/%Y/%m/%d", max_length=100, blank=True, null=True, default="images/match_poster/stadium.jpg"
+        upload_to="images/match_poster/%Y/%m/%d",
+        max_length=100,
+        blank=True,
+        null=True,
+        default="images/match_poster/stadium.jpg",
     )
 
     def __str__(self):
@@ -68,7 +70,7 @@ class Client(AbstractUser):
         upload_to="images/avatars/%Y/%m/%d",
         blank=True,
         null=True,
-        max_length=250
+        max_length=250,
     )
 
 
@@ -76,7 +78,7 @@ class BookedTable(models.Model):
     client = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="booked_tables"
+        related_name="booked_tables",
     )
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -86,7 +88,7 @@ class BookedTable(models.Model):
         validators=[
             RegexValidator(
                 regex=r"^\d{10}$",
-                message="phone number should consists of 10 figures"
+                message="phone number should consists of 10 figures",
             )
         ],
     )
