@@ -1,12 +1,13 @@
 from datetime import timedelta
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import IntegrityError
 from django.http import JsonResponse
 
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -56,10 +57,9 @@ class BookedTableCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         if BookedTable.objects.filter(
                 match_id=self.kwargs["match_id"]
-        ).count() < 15:
-            initial_data = {"match": self.kwargs["match_id"]}
-            if self.request.user.is_authenticated:
-                initial_data["client"] = self.request.user
+        ).count() < settings.MAX_BAR_CAPACITY:
+            initial_data = {"match": self.kwargs["match_id"],
+                            "client": self.request.user}
             context["form"] = BookedTableForm(initial_data)
         else:
             del context["form"]
@@ -84,7 +84,7 @@ class BookedTableCreateView(LoginRequiredMixin, CreateView):
                 status=200,
             )
         else:
-            return JsonResponse({"message": "error"}, status=200)
+            return JsonResponse({"message": "error"}, status=400)
 
 
 class BookedTableListView(LoginRequiredMixin, ListView):
@@ -109,7 +109,7 @@ class BookedTableUpdateView(LoginRequiredMixin, UpdateView):
             self.object.save()
         except IntegrityError:
             pass
-        return redirect("http://127.0.0.1:8000/booked_table_list/")
+        return redirect(reverse("sportbar:booked-table-list"))
 
 
 class BookedTableDeleteView(LoginRequiredMixin, DeleteView):

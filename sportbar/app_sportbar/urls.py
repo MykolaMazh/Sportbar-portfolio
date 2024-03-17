@@ -22,7 +22,7 @@ urlpatterns = [
     path(
         "booked_table/<int:match_id>",
         BookedTableCreateView.as_view(),
-        name=" booked-table",
+        name="booked-table",
     ),
     path(
         "booked_table_list/",
