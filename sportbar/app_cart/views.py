@@ -3,8 +3,9 @@ from django.views.generic import View, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from app_cart.forms import CartAddProductForm, OrderForm
-from app_cart.models import Cart, OrderItem, Order
+from app_cart.models import OrderItem, Order
 from app_sportbar.models import MenuPosition
+from app_cart.cart import Cart
 
 
 def cart(request):
