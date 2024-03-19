@@ -1,9 +1,8 @@
 from datetime import datetime, timedelta
-from pprint import pprint
-
+from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.test import Client, TestCase
+from django.test import TestCase
 from django.urls import reverse
 
 from app_sportbar.models import Championship, Category, Match, BookedTable
@@ -27,7 +26,7 @@ class TestIndex(TestCase):
             Match.objects.create(
                 title=f"Test match{num}",
                 championship=Championship.objects.get(pk=1),
-                event_date=datetime.now() + timedelta(days=7),
+                event_date=timezone.now() + timedelta(days=7),
             )
         response = self.client.get(self.url)
         self.assertEqual(response.context["championships"].count(), 10)
@@ -55,7 +54,7 @@ class BookedTableCreateViewTest(TestCase):
         self.match = Match.objects.create(
             title="Test match",
             championship=championship,
-            event_date=datetime.now(),
+            event_date=timezone.now(),
         )
         self.url = reverse(
             "sportbar:booked-table", kwargs={"match_id": self.match.pk}

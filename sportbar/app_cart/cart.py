@@ -16,7 +16,9 @@ class Cart:
             # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
 
+        # cart exapmle {'11': {'quantity': 2, 'price': '6.78'}}
         self.cart = cart
+
 
     def add(self, product, quantity=1, update_quantity=False):
         product_id = str(product.id)

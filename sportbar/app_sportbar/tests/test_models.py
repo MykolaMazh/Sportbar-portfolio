@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from decimal import Decimal
+from django.utils import timezone
 
 from django.test import TestCase
 from django.urls import reverse
@@ -42,7 +43,7 @@ class MatchTest(TestCase):
         obj = Match.objects.create(
             title="Test Match",
             championship=championship,
-            event_date=datetime.now() + timedelta(days=7),
+            event_date=timezone.now() + timedelta(days=7),
         )
         self.assertEqual(
             str(obj), f"{obj.title} - {obj.event_date.strftime('%M/%d %H:%M')}"
