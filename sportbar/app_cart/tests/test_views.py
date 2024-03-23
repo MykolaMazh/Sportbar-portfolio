@@ -82,3 +82,19 @@ class CartAddTest(TestCase):
             cart_product1["quantity"], self.product1_quantity + add_quantity
         )
         self.assertEqual(cart_product1["price"], str(self.product1.price))
+
+    def test_update_quantity(self):
+        new_quantity = 15
+        self.client.post(
+            self.url1,
+            {"quantity": new_quantity, "update_quantity": True},
+            HTTP_REFERER=self.initial_url,
+        )
+
+        cart = (
+            Session.objects.get().get_decoded().get(settings.CART_SESSION_ID)
+        )
+        cart_product1 = cart.get(str(self.product1.id))
+        self.assertEqual(
+            cart_product1["quantity"], new_quantity
+        )
