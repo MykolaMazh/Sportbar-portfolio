@@ -98,3 +98,42 @@ class CartAddTest(TestCase):
         self.assertEqual(
             cart_product1["quantity"], new_quantity
         )
+
+class CartRemoveTest(TestCase):
+
+    def setUp(self):
+        self.category = Category.objects.create(
+            title="Test Category", slug="test-category"
+        )
+        self.product1 = MenuPosition.objects.create(
+            title="Product 1", price=2.37, category=self.category
+        )
+        self.initial_url = reverse("sportbar:home")
+        self.url1 = reverse(
+            "cart:add-to-cart", kwargs={"id": self.product1.id}
+        )
+        self.client.post(
+            self.url1,
+            {"quantity": 12, "update_quantity": False},
+            HTTP_REFERER=self.initial_url,
+        )
+        self.product2 = MenuPosition.objects.create(
+            title="Product 2", price=12.37, category=self.category
+        )
+        url2 = reverse("cart:add-to-cart", kwargs={"id": self.product2.id})
+        self.client.post(
+            url2,
+            {"quantity": 7, "update_quantity": False},
+            HTTP_REFERER=self.initial_url,
+        )
+
+    def test_product_deleted_from_session(self):
+        url = reverse("cart:move-off-cart", args=[self.product1.id])
+        self.client.get(url)
+        cart = (
+            Session.objects.get().get_decoded().get(settings.CART_SESSION_ID)
+        )
+        self.assertNotIn(str(self.product1.id), cart)
+
+
+
