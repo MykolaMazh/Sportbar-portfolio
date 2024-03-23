@@ -28,12 +28,12 @@ class OrderTest(TestCase):
                 order=order, product=product, price=product.price, quantity=num
             )
 
-            self.assertEqual(
-                order.get_total_cost(),
-                sum(
-                    (
-                        num * Decimal(f"{round(num / 2 + 0.33, 2)}")
-                        for num in range(1, 21)
-                    )
-                ),
-            )
+        self.assertEqual(
+            order.get_total_cost(),
+            sum(
+                (
+                    num * Decimal(f"{round(num / 2 + 0.33, 2)}")
+                    for num in range(1, 21)
+                )
+            ),
+        )
