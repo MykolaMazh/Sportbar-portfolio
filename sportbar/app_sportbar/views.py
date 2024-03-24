@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.http import JsonResponse
 
@@ -39,6 +40,9 @@ class CategoryDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["cart_add_form"] = CartAddProductForm()
+
+        paginator = Paginator(self.object.menu_positions.all(), 3)
+        context["page_obj"] = paginator.get_page(self.request.GET.get("page"))
         return context
 
 
