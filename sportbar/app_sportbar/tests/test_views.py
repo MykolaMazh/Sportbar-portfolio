@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -8,9 +8,6 @@ from django.urls import reverse
 from app_sportbar.models import Championship, Category, Match, BookedTable
 from app_cart.forms import CartAddProductForm
 from app_sportbar.forms import BookedTableForm
-
-
-
 
 
 class TestIndex(TestCase):
@@ -81,12 +78,13 @@ class BookedTableCreateViewTest(TestCase):
                 username=f"user{num}", password="qwerty123456"
             )
             self.client.force_login(user)
-            BookedTable.objects.create(match=self.match,
-                                       client=user, phone="1234567890")
+            BookedTable.objects.create(
+                match=self.match, client=user, phone="1234567890"
+            )
         user = get_user_model().objects.create_user(
             username="user-user", password="qwerty123456"
         )
         self.client.force_login(user)
         response = self.client.get(self.url)
         self.assertEqual(response.context["form"], "")
-        self.assertIn("excess_error",  response.context)
+        self.assertIn("excess_error", response.context)

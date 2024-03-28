@@ -19,6 +19,7 @@ class MatchAdmin(admin.ModelAdmin):
 class ClientAdmin(UserAdmin):
     list_display = ["username", "last_login"]
 
+
 admin.site.register(MenuPosition, MenuPositionAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Match, MatchAdmin)

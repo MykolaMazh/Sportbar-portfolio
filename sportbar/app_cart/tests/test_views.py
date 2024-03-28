@@ -97,24 +97,25 @@ class CartAddTest(TestCase):
             Session.objects.get().get_decoded().get(settings.CART_SESSION_ID)
         )
         cart_product1 = cart.get(str(self.product1.id))
-        self.assertEqual(
-            cart_product1["quantity"], new_quantity
-        )
+        self.assertEqual(cart_product1["quantity"], new_quantity)
+
 
 class CartRemoveTest(TestCase):
-
     def setUp(self):
         session = self.client.session
-        session[settings.CART_SESSION_ID] = {'1': {'quantity': 12, 'price': '2.37'}, '2': {'quantity': 7, 'price': '12.37'}}
+        session[settings.CART_SESSION_ID] = {
+            "1": {"quantity": 12, "price": "2.37"},
+            "2": {"quantity": 7, "price": "12.37"},
+        }
         session.save()
 
     def test_product_deleted_from_session(self):
         category = Category.objects.create(
-                title="Test Category", slug="test-category"
-            )
+            title="Test Category", slug="test-category"
+        )
         product = MenuPosition.objects.create(
-                title="Product 1", price=2.37, category=category
-            )
+            title="Product 1", price=2.37, category=category
+        )
         product_id = product.id
         url = reverse("cart:move-off-cart", args=[product_id])
         self.client.get(url)
@@ -122,7 +123,6 @@ class CartRemoveTest(TestCase):
             Session.objects.get().get_decoded().get(settings.CART_SESSION_ID)
         )
         self.assertNotIn(str(product_id), cart)
-
 
 
 class CreateOrderTest(TestCase):
@@ -154,23 +154,26 @@ class CreateOrderTest(TestCase):
 
     def test_post_clear_session(self):
         url = reverse("cart:order-form")
-        response = self.client.post(url, {
-            "deliver_by": datetime.now() + timedelta(weeks=1),
-            "address": "test address",
-            "phone": 1234567890
-        })
-        self.assertRaises(KeyError, lambda: self.client.session[settings.CART_SESSION_ID])
+        self.client.post(
+            url,
+            {
+                "deliver_by": datetime.now() + timedelta(weeks=1),
+                "address": "test address",
+                "phone": 1234567890,
+            },
+        )
+        self.assertRaises(
+            KeyError, lambda: self.client.session[settings.CART_SESSION_ID]
+        )
 
     def test_post_create_order(self):
         url = reverse("cart:order-form")
         deliver_by = datetime.now(tz=dt.timezone.utc) + timedelta(weeks=1)
         address = "test address"
         phone = 1234567890
-        response = self.client.post(url, {
-            "deliver_by": deliver_by,
-            "address": address,
-            "phone": phone
-        })
+        self.client.post(
+            url, {"deliver_by": deliver_by, "address": address, "phone": phone}
+        )
         order = Order.objects.get()
         self.assertEqual(order.deliver_by, deliver_by)
         self.assertEqual(order.address, address)

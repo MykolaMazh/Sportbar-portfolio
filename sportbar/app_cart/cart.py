@@ -19,7 +19,6 @@ class Cart:
         # cart exapmle {'11': {'quantity': 2, 'price': '6.78'}}
         self.cart = cart
 
-
     def add(self, product, quantity=1, update_quantity=False):
         product_id = str(product.id)
 
@@ -27,7 +26,7 @@ class Cart:
         if product_id not in self.cart:
             self.cart[product_id] = {
                 "quantity": 0,
-                "price": str(product.price)
+                "price": str(product.price),
             }
 
         if update_quantity:
@@ -52,8 +51,8 @@ class Cart:
     def get_total_cost(self):
         # the cart total cost
         return sum(
-            Decimal(item["price"])
-            * item["quantity"] for item in self.cart.values()
+            Decimal(item["price"]) * item["quantity"]
+            for item in self.cart.values()
         )
 
     def save(self):

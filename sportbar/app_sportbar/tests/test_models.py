@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 from decimal import Decimal
 from django.utils import timezone
 
@@ -32,7 +32,7 @@ class MenuPositionTest(TestCase):
         obj = MenuPosition.objects.create(
             title="Test MenuPosition",
             price=Decimal("100.22"),
-            category=category
+            category=category,
         )
         self.assertEqual(str(obj), obj.title)
 
