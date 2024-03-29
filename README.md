@@ -5,3 +5,9 @@ Sport bar website where one can book a table for watching sport events or order 
 To order a table, one need to register, after which one can change or cancel his/her reservation.
 
 The implementation of delivery is carried out through the use of sessions and is stored in the database after placing the order. Registration is not required to place an order, but registered users have access to the order history.
+
+>To launch project create file `.env`
+> 
+> ```python
+> SECRET_KEY="set your secret key"
+
