@@ -24,7 +24,6 @@ class Order(models.Model):
     is_delivered = models.BooleanField(default=False)
     is_paid = models.BooleanField(default=False)
 
-    # total order cost with get_cost() from related Model OrderItem
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.order_items.all())
 

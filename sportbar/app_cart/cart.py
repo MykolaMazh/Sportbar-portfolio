@@ -7,22 +7,19 @@ from app_sportbar.models import MenuPosition
 
 class Cart:
     def __init__(self, request):
-        # current session
+        """Creates an instance of the Cart class getting info from sessions
+        or creates new empty session. cart example {'11': {'quantity': 2, 'price': '6.78'}}
+        """
         self.session = request.session
-
-        # session cart
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
-            # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
-
-        # cart exapmle {'11': {'quantity': 2, 'price': '6.78'}}
         self.cart = cart
 
     def add(self, product, quantity=1, update_quantity=False):
+        """adds a product to the cart or update the product quantity"""
         product_id = str(product.id)
 
-        # freeze the current price
         if product_id not in self.cart:
             self.cart[product_id] = {
                 "quantity": 0,
@@ -37,8 +34,10 @@ class Cart:
         self.save()
 
     def __iter__(self):
+        """Enable iteration over the cart({'11': {'quantity': 2, 'price': '6.78'}}) values
+        and yields the dictionaries with added key
+        {'quantity': 2, 'price': '6.78', 'product':'product', 'total_price': Decimal('26.78')}"""
         product_ids = self.cart.keys()
-        # getting products from model
         products = MenuPosition.objects.filter(id__in=product_ids)
         for product in products:
             self.cart[str(product.id)]["product"] = product
@@ -49,14 +48,14 @@ class Cart:
             yield item
 
     def get_total_cost(self):
-        # the cart total cost
+        """the cart total cost"""
         return sum(
             Decimal(item["price"]) * item["quantity"]
             for item in self.cart.values()
         )
 
     def save(self):
-        # update session. it's a dict now
+        """Saves updated cart into session"""
         self.session[settings.CART_SESSION_ID] = self.cart
 
     def remove(self, product):
@@ -66,8 +65,8 @@ class Cart:
             self.save()
 
     def __len__(self):
+        """returns number of products in cart"""
         return sum(item["quantity"] for item in self.cart.values())
 
     def clear(self):
-        # delete the cart from session
         del self.session[settings.CART_SESSION_ID]
