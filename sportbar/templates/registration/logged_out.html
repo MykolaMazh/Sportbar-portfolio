@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="form-added">You've logged out</h1>
+<div class="centered-div">
+    <a href="{% url 'login' %}" class="button">Log in back</a>
+    <br>or<br>
+   <a href="{{request.META.HTTP_REFERER}}" class="button">Proceed as guest</a>
+</div>
+
+
+
+{% endblock %}

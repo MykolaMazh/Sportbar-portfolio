@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block content %}
+  <form class="form-added" method="post">
+  {% csrf_token %}
+    <h1>Here you can cancel you booking for</h1>
+    <h2>{{ object.match.title }}</h2>
+    <button type="submit" class="btn btn-danger">Cancel my booking</button>
+  </form>
+{% endblock %}
