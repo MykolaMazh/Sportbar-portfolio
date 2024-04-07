@@ -30,7 +30,6 @@ def index(request):
             "championships": Championship.objects.all(),
             "categories": Category.objects.all(),
             "matches": Match.objects.select_related("championship"),
-            "debug_mode": settings.DEBUG
         },
     )
 
