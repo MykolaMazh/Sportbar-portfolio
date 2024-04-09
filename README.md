@@ -16,3 +16,9 @@ The implementation of delivery is carried out through the use of sessions and is
 >  ```python
 >  SECRET_KEY="set your secret key"
 
+>Production link https://sportbar.onrender.com
+
+
+>for test app use you can register or login with<br>
+login `test_user`<br>
+password `G5fPHqu4sXpkXZv`
