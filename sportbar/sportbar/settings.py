@@ -91,7 +91,6 @@ DATABASES = {
 }
 
 # connect PostgreSQL using env variableDATABASE_URL
-db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(dj_database_url.config(
     conn_max_age=600,
     conn_health_checks=True,
