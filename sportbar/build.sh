@@ -2,10 +2,14 @@
 # Exit on error
 set -o errexit
 
-echo "Current working directory: $(pwd)"
+pip install --upgrade pip
+pip install --prefer-binary -r /opt/render/project/requirements.txt
+
+pip install --upgrade setuptools wheel
+
 
 # Modify this line as needed for your package manager (pip, poetry, etc.)
-pip install -r ../requirements.txt
+pip install -r ./requirements.txt
 
 # Convert static asset files
 python manage.py collectstatic --no-input
